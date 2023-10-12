@@ -61,6 +61,7 @@ public class basePlusCommisionEmployee extends Employee{
 	@Override
 	public void calculateSalary() {
 		// TODO Auto-generated method stub
+		this.baseSalary += this.baseSalary*0.10; 
 		this.totalSalary = this.baseSalary+(this.grossSales*this.commisionRate);
 	}
 	public void displayData() {
