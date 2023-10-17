@@ -6,7 +6,7 @@ public class BookMain {
 		// TODO Auto-generated method stub
 		int choice;
 		Scanner sc = new Scanner(System.in);
-		ArrayList<BookDetails> c = new ArrayList<>();
+		List<BookDetails> list = new ArrayList<>();
 		do {
 			System.out.println("0.Exit.");
 			System.out.println("1. Add new book in list.");
@@ -25,10 +25,10 @@ public class BookMain {
 			case 1:
 				BookDetails b = new BookDetails();
 				b.accept();
-				c.add(b);
+				list.add(b);
 				break;
 			case 2:
-				for(BookDetails b1 : c) {
+				for(BookDetails b1 : list) {
 					System.out.println(b1);
 				}
 				break;
@@ -36,42 +36,45 @@ public class BookMain {
 				int index;
 				System.out.println("Enter book location to delete: ");
 				index = sc.nextInt();
-				for(int i = 0 ; i < c.size() ; i++) {
+				for(int i = 0 ; i < list.size() ; i++) {
 					if(index == i) {
-						c.remove(index);
+						list.remove(index);
 					}
 				}
 				break;
 			case 4: 
-				int isbn;
-				System.out.println("Enter ISBN you want to check: ");
-				isbn = sc.nextInt();
-				for(int i = 0 ; i < c.size() ; i++) {
-					if(c.contains(isbn))
-						System.out.println("Book present at index "+i);
-					else
-						System.out.println("Book not found");
-				}
+				int ISBN = sc.nextInt();
+				BookDetails key = new BookDetails();
+				key.setISBN(ISBN);
+				if(list.contains(key))
+					System.out.println("Found");
+				else
+					System.out.println("Not Found");
 				break;
 			case 5:
-				c.clear();
+				list.clear();
 				break;
 			case 6:
-				System.out.println("Total books: "+c.size());
+				System.out.println("Total books: "+list.size());
 				break;
 			case 7:
 				class BookSort implements Comparator<BookDetails>{
-
-					@Override
 					public int compare(BookDetails b1, BookDetails b2) {
-						// TODO Auto-generated method stub
+						
 						int diff = -Double.compare(b1.getPrice(), b2.getPrice());
 						return diff;
 					}	
 				}
 				
-				BookSort b3 = new BookSort();
-				Arrays.sort(c,b3);
+				BookSort book = new BookSort();
+				list.sort(book);
+				
+				System.out.println("Books in descending order..");
+				for (BookDetails bookDetails : list) {
+					System.out.println(bookDetails);
+				}
+				
+				
 			}
 			
 		} while (choice!= 0);
